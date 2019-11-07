@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/add_story.css">
+    <link rel="stylesheet" href="css/navbar.css">
+
+    <title>Document</title>
+</head>
+<a href="./add_article.html" class="float">
+    <i class="fa fa-plus my-float"></i>
+</a>
+<header>
+    <div class="container">
+
+        <a href="./home.html">
+            <h1 class="logo">Broad<span>caster</span></h1>
+        </a>
+
+        <nav class="site-nav">
+            <ul>
+                <li><a href="./author.html" id="side-nav-item"><i class="fa fa-home site-nav--icon"></i>My dashboard</a>
+                </li>
+               
+                <li><a href="#/" id="side-nav-item"><i class="fa fa-envelope site-nav--icon"></i>logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+        </div>
+
+    </div>
+</header>
+
+<body>
+    <div class="containe">
+        <!-- <h2 class="title">Add an article</h2> -->
+        <h2 class="quote">Add a Red-flag/Intervention</h2>
+
+        <form action="/stories" method="post">
+            <div class="row">
+                <label for="title">Title</label>
+                <input type="text" name="title" placeholder="title">
+            </div>
+
+            <div class="row">
+                <label for="type">Type</label>
+                <div class="radio-group">
+                    <label class="radio">
+                        <input type="radio" name="type" id="red-flag" value="red-flag">Red flag
+                        <span></span>
+                    </label><br>
+                    <label class="radio">
+                        <input type="radio" name="type" id="intervention" value="intervention">intervention
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <label for="title">Location</label>
+                    <input type="text" name="category" placeholder="latitude, longitude">
+                </div>
+            </div>
+            <div class="row">
+                <div class="images">
+                    <label> Upload images:</label>
+                    <div class="prime-inpt">
+            
+                        <input type="file" class="number_input_2" autofocus multiple />
+            
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="videos">
+                    <label> Upload videos:</label>
+                    <div class="prime-inpt">
+            
+                        <input type="file" class="number_input_2" autofocus multiple />
+            
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field">
+                    <h4>Comment:</h4>
+                    <textarea name="body"></textarea>
+                </div>
+            </div>
+            
+
+            <input type="submit" value="Submit" class="btn">
+        </form>
+    </div>
+    <script src="js/navbar.js"></script>
+</body>
+
+</html>
