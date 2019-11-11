@@ -4,7 +4,7 @@
   "description": "a red-flag/intervention call app",
   "main": "server/app.js",
   "scripts": {
-    "test": "node --require @babel/register ./config/myDb.js createAllTables && nyc --require @babel/register mocha test/*.js --exit",
+    "test": "nyc --require @babel/register mocha  server/test/v1/*.js --exit",
     "lint": "eslint --ignore-path .gitignore **/*.js",
     "format": "prettier-eslint **/*.{js,json} --write",
     "start": "nodemon --exec babel-node ./server/app.js",
