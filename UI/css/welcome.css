@@ -36,11 +36,14 @@ a {
     height: 350px;
 }
 .card-item {
-    background: #011640;
+    /* background: #011640; */
+    /* background: #3E38F2; */
+    background:url('https://www.employ-africa.co.za/wp-content/uploads/2019/04/Employ-Africa-African-Reach-Compliant-HR-Payroll-Immigration-Tax.png');
     position: relative;
 }
 .card-form {
-    background: #2E3D51;
+    /* background: #2E3D51; */
+    background: #0029FA;
     position: relative;
 }
 a:hover {
@@ -61,7 +64,7 @@ a:hover {
 .slide input {
     width: 100%;
     padding: 10px 4px;
-     background-color:#4F5573;
+     background-color:#5C73F2;
     border-width: 0;
     color: #fff;
 }
@@ -71,7 +74,7 @@ input:focus {
 
 input::-webkit-input-placeholder {
      color: white;
-     opacity: 0.5;
+     opacity: .8;
 }
 input{
     margin-bottom: 4px;
@@ -105,15 +108,18 @@ input:last-child{
       padding: 10px 30px 6px 25px;
       font-size: 18px;
       box-shadow:none;
-      background: #008EFA;
+      background: #0029FA;
       color: #fff;
+      border: 1px solid white;
+      border-radius: 5px;
 }
 .card-item-content:hover {
+      /* border:1px solid #0029FA; */
     background: #fff;
     box-sizing: border-box;
 }
 .card-item-content:hover a {
-    color: #008EFA;
+    color: #0029FA;
 }
 .forget {
     font-size: .7em;
@@ -191,7 +197,7 @@ span {
       font-size: 18px;
       box-shadow:none;
       
-      background: #007FE0;
+      background:  #0029FA;
       color: #fff;
     }
     .container {
@@ -201,7 +207,7 @@ span {
         box-sizing: border-box;
     }
     .card-item-content:hover {
-        background: #008EFA;   
+        background:  #0029FA;   
         box-sizing: content-box;
     }
     #signin,#signup {
