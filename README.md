@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bihire/Broadcatser.svg?branch=develop)](https://travis-ci.org/bihire/Broadcatser)
+[![Build Status](https://travis-ci.org/bihire/Broadcatser.svg?branch=develop)](https://travis-ci.org/bihire/Broadcatser)   [![Coverage Status](https://coveralls.io/repos/github/bihire/Broadcatser/badge.svg?branch=develop)](https://coveralls.io/github/bihire/Broadcatser?branch=develop)  [![Maintainability](https://api.codeclimate.com/v1/badges/ee5e9ba168c869950df1/maintainability)](https://codeclimate.com/github/bihire/Broadcatser/maintainability)
 
 
 # Broadcatser
