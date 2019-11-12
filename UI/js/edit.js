@@ -2,7 +2,6 @@
 var save = document.getElementById("save")
 save.onclick = function (e) {
     e.preventDefault()
-    console.log(save)
     window.location.href = "./article_detail.html";
 };
 
