@@ -108,12 +108,12 @@ export default (req, res, next) => {
                 });
                 break;
 
-            default:
-                res.status(400).send({
-                    status: "error",
-                    error: `invalid information`
-                });
-                break;
+            // default:
+            //     res.status(400).send({
+            //         status: "error",
+            //         error: `invalid information`
+            //     });
+            //     break;
         }
     } else {
         delete value.confirmPassword
