@@ -31,7 +31,7 @@ export default class AuthanticationController {
             res.status(201).send({
                 status: 201,
                 message: "User created successfully",
-                data: value
+                data: {token: token}
             });
 
 
