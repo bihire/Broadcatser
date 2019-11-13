@@ -14,25 +14,25 @@ export default (req, res, next) => {
     } = req.body;
     const user = {
         id: id_auto_inc(users),
-        firstName,
-        lastName,
+        first_name: firstName,
+        last_name: lastName,
         email,
-        phoneNumber,
+        phone_number: phoneNumber,
         password,
-        confirmPassword,
-        isAdmin
+        confirm_password: confirmPassword,
+        is_admin: isAdmin
     };
     const schema = joi.object().keys({
         id: joi
             .number()
             .integer()
             .required(),
-        firstName: joi
+        first_name: joi
             .string()
             .regex(/^[a-zA-Z0-9\s]{3,25}$/)
             .trim()
             .required(),
-        lastName: joi
+        last_name: joi
             .string()
             .trim()
             .regex(/^[a-zA-Z0-9\s]{3,25}$/)
@@ -46,16 +46,16 @@ export default (req, res, next) => {
             .string()
             .regex(new RegExp("^[a-zA-Z0-9]{8,32}$"))
             .required(),
-        phoneNumber: joi
+        phone_number: joi
             .string()
             .trim()
             .regex(new RegExp("^[0-9]{10}$"))
             .required(),
-        confirmPassword: joi
+        confirm_password: joi
             .string()
             .required()
             .valid(joi.ref("password")),
-        isAdmin: joi.boolean().default(false)
+        is_admin: joi.boolean().default(false)
     });
     const { error, value } = joi.validate(user, schema);
 
@@ -80,28 +80,28 @@ export default (req, res, next) => {
                 });
                 break;
 
-            case "firstName":
+            case "first_name":
                 res.status(400).send({
                     status: "error",
                     error: `the first name is compulsory and must contain between 3-25 alphabetic characters`
                 });
                 break;
 
-            case "lastName":
+            case "last_name":
                 res.status(400).send({
                     status: "error",
                     error: `the last name(s) is(are) compulsory and must contain between 3-25 alphabetic characters`
                 });
                 break;
 
-            case "confirmPassword":
+            case "confirm_password":
                 res.status(400).send({
                     status: "error",
                     error: `please provide identical passwords`
                 });
                 break;
 
-            case "phoneNumber":
+            case "phone_number":
                 res.status(400).send({
                     status: "error",
                     error: `you must provide a valid phone number containing 10 numbers`
@@ -116,7 +116,7 @@ export default (req, res, next) => {
             //     break;
         }
     } else {
-        delete value.confirmPassword
+        delete value.confirm_password
         req.value = value;
         next();
     }
