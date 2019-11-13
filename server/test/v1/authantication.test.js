@@ -177,4 +177,89 @@ describe('User Signup', () => {
         });
 });
     });
+    describe('User SignIn', () => {
+        it('User should receive a success message after loggin', (done) => {
+            supertest('http://localhost:8080/api/v1')
+                .post('/auth/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    email: "muhireboris@yahoo.fr",
+                    password: "bobo1234"
+                })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.should.be.a('object');
+                    done();
+                });
+        });
+    });
+    describe('User SignIn', () => {
+        it('User should receive an error message about email', (done) => {
+            supertest('http://localhost:8080/api/v1')
+                .post('/auth/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    email: "muhireborisyahoo.fr",
+                    password: "bobo1234"
+                })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.should.be.a('object');
+                    done();
+                });
+        });
+    });
+    describe('User SignIn', () => {
+        it('User should receive an error message about password', (done) => {
+            supertest('http://localhost:8080/api/v1')
+                .post('/auth/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    email: "muhireboris@yahoo.fr",
+                    password: 1234
+                })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.should.be.a('object');
+                    done();
+                });
+        });
+    });
+    describe('User SignIn', () => {
+        it('User should receive an error message about existance of email', (done) => {
+            supertest('http://localhost:8080/api/v1')
+                .post('/auth/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    email: "muhire@yahoo.fr",
+                    password: "bobo1234"
+                })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    res.should.have.status(401);
+                    res.should.be.a('object');
+                    done();
+                });
+        });
+    });
+    describe('User SignIn', () => {
+        it('User should receive an error message about passord match', (done) => {
+            supertest('http://localhost:8080/api/v1')
+                .post('/auth/signin')
+                .set('Accept', 'application/json')
+                .send({
+                    email: "muhireboris@yahoo.fr",
+                    password: "bobo12345"
+                })
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    res.should.have.status(401);
+                    res.should.be.a('object');
+                    done();
+                });
+        });
+    });
 })

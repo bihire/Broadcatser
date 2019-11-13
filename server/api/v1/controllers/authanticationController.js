@@ -2,6 +2,8 @@ import express from 'express'
 import jwt from 'jsonwebtoken'
 import users from "../models/user"
 import hashPassword from '../heplpers/hash'
+import comparePassword from '../heplpers/compareHash'
+
 
 const app = express();
 
@@ -37,4 +39,39 @@ export default class AuthanticationController {
             });
         }
     }
+    /**
+   * @description This checks if it is a registered Employee and returns a token as a response
+   * @param  {object} req - The request object
+   * @param  {object} res - The response object
+   */
+    static async login(req, res) {
+        try {
+            const value = req.value;
+            const User = users.find(user => user.email === value.email);
+            if (!User) {
+                throw res.status(401).json({
+                    message: 'email or password do not match'
+                });
+            }
+            const isUser = await comparePassword({ value, User })
+
+            if (isUser) {
+                const token = jwt.sign(User, app.get(process.env.secret));
+                res.status(200).json({
+                    status: 200,
+                    message: 'User is successfully logged in',
+                    data: {token:token}
+                })
+            } else {
+                res.status(401).json({ status: 401, error: 'email or password do not match' });
+            }
+
+        } catch (error) {
+            res.status(403).send({
+                status: 'error',
+                error: `invalid email or password:   ${error}`
+            });
+        }
+    }
+
 };
