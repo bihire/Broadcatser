@@ -1,4 +1,6 @@
 import joi from "joi"
+import responseMsg from '../../heplpers/responseMsg'
+
 export default (req, res, next) => {
     const { email, password } = req.body
     const user = { email, password }
