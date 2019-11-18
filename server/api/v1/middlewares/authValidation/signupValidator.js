@@ -1,5 +1,7 @@
 import users from "../../models/user"
 import id_auto_inc from "../../heplpers/id_auto_inc"
+import responseMsg from '../../heplpers/responseMsg'
+
 
 import joi from "joi"
 export default (req, res, next) => {
@@ -57,65 +59,12 @@ export default (req, res, next) => {
             .valid(joi.ref("password")),
         is_admin: joi.boolean().default(false)
     });
-    const { error, value } = joi.validate(user, schema);
-
+    const { error, value } = joi.validate(user, schema)
     if (error) {
-        switch (error.details[0].context.key) {
-            case "password":
-                res.status(400).send({
-                    status: "error",
-                    error: `password provided failed to match the following rules:
-              <br>
-              1. must contain the following charaters: lower case, upper case, integers
-              <br>
-              2. It must at least be 8 - 32 characters long
-              `
-                });
-                break;
-
-            case "email":
-                res.status(400).send({
-                    status: "error",
-                    error: `you must provide a valid email`
-                });
-                break;
-
-            case "first_name":
-                res.status(400).send({
-                    status: "error",
-                    error: `the first name is compulsory and must contain between 3-25 alphabetic characters`
-                });
-                break;
-
-            case "last_name":
-                res.status(400).send({
-                    status: "error",
-                    error: `the last name(s) is(are) compulsory and must contain between 3-25 alphabetic characters`
-                });
-                break;
-
-            case "confirm_password":
-                res.status(400).send({
-                    status: "error",
-                    error: `please provide identical passwords`
-                });
-                break;
-
-            case "phone_number":
-                res.status(400).send({
-                    status: "error",
-                    error: `you must provide a valid phone number containing 10 numbers`
-                });
-                break;
-
-            // default:
-            //     res.status(400).send({
-            //         status: "error",
-            //         error: `invalid information`
-            //     });
-            //     break;
-        }
+        
+        responseMsg.errorMsg(res, 400, error.details[0].message)
     } else {
+
         delete value.confirm_password
         req.value = value;
         next();

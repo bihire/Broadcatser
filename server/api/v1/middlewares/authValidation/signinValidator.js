@@ -1,4 +1,6 @@
 import joi from "joi"
+import responseMsg from '../../heplpers/responseMsg'
+
 export default (req, res, next) => {
     const { email, password } = req.body
     const user = { email, password }
@@ -16,23 +18,8 @@ export default (req, res, next) => {
     const { error, value } = joi.validate(user, schema);
 
     if (error) {
-        switch (error.details[0].context.key) {
 
-
-            case "email":
-                res.status(400).send({
-                    status: "error",
-                    error: `you must provide a valid email`
-                });
-                break;
-
-            default:
-                res.status(400).send({
-                    status: "error",
-                    error: `invalid information`
-                });
-                break;
-        }
+        responseMsg.errorMsg(res, 400, error.details[0].message)
     } else {
         req.value = value;
         next();
