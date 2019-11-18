@@ -11,10 +11,10 @@ import responseMsg from '../../heplpers/responseMsg'
 
 export default (req, res, next) => {
     try {
-        upload(req, res, function (err) {
+        upload(req, res,() =>{
 
             if (req.fileValidationError) {
-                res.status(400).json({ status: 400, message: req.fileValidationError });
+                responseMsg.errorMsg(res, 400, req.fileValidationError)
 
             } else {
                 const allUrls = []
