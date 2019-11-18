@@ -1,5 +1,7 @@
 import app from './app'
+import responseMsg from './api/v1/heplpers/responseMsg'
+
 app.get("/", (req, res) => {
-  res.status(200).json({status:200,message:"Welcome to our api"});
+  responseMsg.successMsg(res, 200, "Welcome to our api")
 })
 

@@ -10,7 +10,7 @@ const app = express();
 app.set(process.env.secret, "super-secret-secret");
 export default class AuthanticationController {
     /**
-     * @description This helps a new Employee to create credentials
+     * @description This helps a new User to create credentials
      * @param  {object} req - The request object
      * @param  {object} res - The response object
      */
@@ -40,7 +40,7 @@ export default class AuthanticationController {
         }
     }
     /**
-   * @description This checks if it is a registered Employee and returns a token as a response
+   * @description This checks if it is a registered User and returns a token as a response
    * @param  {object} req - The request object
    * @param  {object} res - The response object
    */

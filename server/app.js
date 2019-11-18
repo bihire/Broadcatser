@@ -4,12 +4,24 @@ import express from "express"
 import morgan from "morgan"
 import bodyparser from "body-parser"
 import dotenv from 'dotenv'
+// import multer from 'multer'
+// const upload = multer()
+// import upload from '../server/api/v1/heplpers/multer'
+
 dotenv.config()
 
 const app = express();
 
 app.use(morgan("combined"));
 app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+// app.use(upload.fields([
+//     {
+//         name: 'image'
+//     }, {
+//         name: 'video'
+//     }
+// ])); 
 
 app.use((req, res, next) => {
     let version = req.url.match(/\/api\/(v[0-9]+).*/) || [];
@@ -28,7 +40,7 @@ app.use((req, res, next) => {
         const appPath = path.join(__dirname, `./api/${version}/index.js`);
         if (!fs.existsSync(appPath)) {
             return res.status(404).send({
-                message: "It's not us, sorry we can't find this end point"
+                message: "sorry we don't offer that version of endpoints"
             });
         }
         require(appPath)

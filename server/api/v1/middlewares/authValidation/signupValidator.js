@@ -26,6 +26,7 @@ export default (req, res, next) => {
         id: joi
             .number()
             .integer()
+            .min(3)
             .required(),
         first_name: joi
             .string()
