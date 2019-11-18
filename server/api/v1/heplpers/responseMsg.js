@@ -5,7 +5,7 @@ export default class responseMsg{
             message: message
         })
     }
-   static async errorMsg() {
+    static async errorMsg(res, status, message) {
         res.status(status).json({
             status: status,
             error: message
