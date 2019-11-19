@@ -15,8 +15,6 @@ export default class RedFlagController {
     static async create (req, res) {
        const value = req.value
        redFlag.push({...value})
-        value.images.forEach(obj => fs.unlinkSync(obj))
-        value.videos.forEach(obj => fs.unlinkSync(obj))
 
         res.status(201).json({
             status: 201,
@@ -36,7 +34,7 @@ export default class RedFlagController {
         const value = req.value
         let update = findById(redFlags, value.red_flag_id)
         if (!update) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-        if (res.token.id != update.created_by && update.status !== 'draft' ) throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+        if (res.token.id != update.created_by || update.status !== 'draft' ) throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
 
         update.location = value.location ? value.location : update.location
         res.status(200).json({
@@ -56,7 +54,7 @@ export default class RedFlagController {
        const value = req.value
        let update = findById(redFlags, value.red_flag_id)
        if (!update) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-       if (res.token.id != update.created_by && update.status !== 'draft') throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+       if (res.token.id != update.created_by || update.status !== 'draft') throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
 
        update.comment = value.comment ? value.comment : update.comment
        res.status(200).json({
@@ -93,6 +91,31 @@ static async getOne(req, res) {
         res.status(200).json({
             status: 200,
             data: redFlags
+        })
+    }
+    /**
+    * @description This helps the authorized User to delete their red-flag/intervention
+    * @param  {object} req - The request object
+    * @param  {object} res - The response object
+    */
+    static async delete(req, res) {
+        const { red_flag_id } = req.params
+
+        let item = findById(redFlags, red_flag_id)
+        if (!item) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+        if (item.created_by !== res.token.id || item.status !== 'draft') throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+        const validId = redFlags.findIndex(redFlag => redFlag.id == red_flag_id)
+
+        item.images.forEach(obj => fs.unlinkSync(obj))
+        item.videos.forEach(obj => fs.unlinkSync(obj))
+        redFlags.splice(validId, 1)
+
+        res.status(200).json({
+            status: 200,
+            data: [{
+                id: item.id,
+                message: 'red-flag record has been deleted'
+            }]
         })
     }
 }

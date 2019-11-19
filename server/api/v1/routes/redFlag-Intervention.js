@@ -12,5 +12,6 @@ router.patch("/:red_flag_id/location", authanticationJWT, locationRedFlagValidat
 router.patch("/:red_flag_id/comment", authanticationJWT, commentRedFlagValidator, redFlagController.updateComment)
 router.get("/:red_flag_id", authanticationJWT,  redFlagController.getOne)
 router.get("/", authanticationJWT,  redFlagController.getAll)
+router.delete("/:red_flag_id", authanticationJWT,  redFlagController.delete)
 
 export default router;
