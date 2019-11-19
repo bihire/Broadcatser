@@ -47,5 +47,25 @@ export default class RedFlagController {
                 message: 'Updated red-flag record’s location'
             }]
         })
-}
+    }
+    /**
+    * @description This helps the authorized User to update an existing red-flag/intervention comment
+    * @param  {object} req - The request object
+    * @param  {object} res - The response object
+    */
+   static async updateComment(req, res) {
+       const value = req.value
+       let update = findById(redFlags, value.red_flag_id)
+       if (!update) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+       if (res.token.id != update.created_by && update.status !== 'draft') throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+
+       update.comment = value.comment ? value.comment : update.comment
+       res.status(200).json({
+           status: 200,
+           data: [{
+               id: update.id,
+               message: 'Updated red-flag record’s comment'
+           }]
+       })
+   }
 }
