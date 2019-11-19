@@ -17,7 +17,7 @@ describe('Authantication', () => {
                 .send({
                     firstName: " bihire",
                     lastName: "boris",
-                    email: "muhirebori@yahoo.fr",
+                    email: "muhireboris@yahoo.fr",
                     password: "bobo1234",
                     confirmPassword: "bobo1234",
                     phoneNumber: "1234567890 "
