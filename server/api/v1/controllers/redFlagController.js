@@ -37,7 +37,7 @@ export default class RedFlagController {
         const value = req.value
         let update = findById(redFlags, value.red_flag_id)
         if (!update) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-        if (res.token.id != update.created_by) throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+        if (res.token.id != update.created_by && update.status !== 'draft' ) throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
 
         update.location = value.location ? value.location : update.location
         res.status(200).json({
