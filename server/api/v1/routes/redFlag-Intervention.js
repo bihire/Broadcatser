@@ -11,5 +11,6 @@ router.post("/", authanticationJWT,createRedFlagValidator,redFlagController.crea
 router.patch("/:red_flag_id/location", authanticationJWT, locationRedFlagValidator, redFlagController.updateLocation)
 router.patch("/:red_flag_id/comment", authanticationJWT, commentRedFlagValidator, redFlagController.updateComment)
 router.get("/:red_flag_id", authanticationJWT,  redFlagController.getOne)
+router.get("/", authanticationJWT,  redFlagController.getAll)
 
 export default router;
