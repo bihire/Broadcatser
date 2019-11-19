@@ -84,4 +84,15 @@ static async getOne(req, res) {
         data: item
     })
 }
+    /**
+    * @description This helps the authorized User to fetch all red-flag/intervention
+    * @param  {object} req - The request object
+    * @param  {object} res - The response object
+    */
+    static async getAll(req, res) {
+        res.status(200).json({
+            status: 200,
+            data: redFlags
+        })
+    }
 }
