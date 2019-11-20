@@ -40,8 +40,14 @@ export default (req, res, next) => {
                     imageUrls.length = 0
                     videoUrls.length = 0
                 }
-                const { location } = JSON.parse(req.body.thisBody)
-                if (location && typeof location === 'string') {
+                const { location, labels } = JSON.parse(req.body.thisBody)
+                if (location && typeof location === 'string' && labels && typeof labels === 'string') {
+                    // labels
+                    const labelsItems = labels.split(',')
+                    const trimlabelsItems = []
+                    labelsItems.forEach(obj => trimlabelsItems.push(obj.replace(/(^\ *)|(\ *$)/g, '').replace(/ +/g, " ")))
+                    const newLabels = trimlabelsItems.filter(obj => obj !== '')
+                    // longitude
                     const latLong = location.split(',')
                     if (latLong.length !== 2) {
                         emptyUrlsArr()
@@ -53,6 +59,8 @@ export default (req, res, next) => {
                         responseMsg.errorMsg(res, 400, 'one field is empty or not a number')
 
                     } else {
+                        const latitude = latLong[0]
+                        const longitude = latLong[1]
                         const token = res.token
                         const {
                             title,
@@ -66,7 +74,8 @@ export default (req, res, next) => {
                             created_by: token.id,
                             title,
                             type,
-                            location,
+                            longitude,
+                            latitude,
                             comment,
                             created_on: dateTime
                         };
@@ -97,9 +106,15 @@ export default (req, res, next) => {
                                 .trim()
                                 .regex(/^[a-z\d\-_\s!@#$%^&*()+=?<>.,;:'"]+$/i)
                                 .required(),
-                            location: joi
-                                .string()
-                                .trim()
+                            longitude: joi
+                                .number()
+                                .min(-180)
+                                .max(+180)
+                                .required(),
+                            latitude: joi
+                                .number()
+                                .min(-90)
+                                .max(90)
                                 .required(),
                             status: joi
                                 .string()
@@ -112,6 +127,10 @@ export default (req, res, next) => {
                             emptyUrlsArr()
                             responseMsg.errorMsg(res, 400, error.details[0].message)
                         } else {
+                            delete value.latitude
+                            delete value.longitude
+                            value.location = location
+                            value.labels = newLabels
                             value.images = imageUrls
                             value.videos = videoUrls
                             req.value = value;
@@ -121,7 +140,7 @@ export default (req, res, next) => {
                     }
                 } else {
                     emptyUrlsArr()
-                    responseMsg.errorMsg(res, 400, 'location is compulsory and must be type of string')
+                    responseMsg.errorMsg(res, 400, 'location and labels are compulsory and must be type of string')
                 }
             }
         })
