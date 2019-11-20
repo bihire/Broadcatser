@@ -20,8 +20,7 @@ export default class RedFlagController {
             status: 201,
             data: [{
                 id: value.id,
-                message: 'Created red- flag record',
-                value: value
+                message: 'Created red- flag record'
             }]
             
         })
