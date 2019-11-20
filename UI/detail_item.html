@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/add_story.css">
+    <link rel="stylesheet" href="css/article_detail.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/property.css">
+
+    <title>Document</title>
+</head>
+<a href="./add_item.html" class="float">
+    <i class="fa fa-plus my-float"></i>
+</a>
+<header>
+    <div class="container">
+
+        <a href="./profile.html">
+            <h1 class="logo">Broad<span>cast</span></h1>
+        </a>
+
+        <nav class="site-nav">
+            <ul>
+                <li><a href="./all_items.html" id="side-nav-item">Admin</a>
+                </li>
+                
+                <li><a href="../index.html" id="side-nav-item"></i>logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+        </div>
+
+    </div>
+</header>
+
+<body>
+
+
+    <!-- The Modal delete -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p>Are you sure you want to delete this article?</p>
+            <div class="option">
+
+                <button class="btn" id="delete">Delete</button>
+                <button class="btn close" id="cancel">Cancel</button>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="myFlagModal" class="modal">
+
+        <div class="modal-content flag">
+            <div class="row">
+                <div class="row">
+                    <label for="type">Do you want to set a new status?</label>
+                    <div class="radio-group">
+                        <label class="radio">
+                            <input type="radio" name="status" id="red-flag" value="under-intervention">under-intervention
+                            <span></span>
+                        </label><br>
+                        <label class="radio">
+                            <input type="radio" name="status" id="resolved" value="resolved">resolved
+                            <span></span>
+                        </label><br/>
+                        <label class="radio">
+                            <input type="radio" name="status" id="rejected" value="rejected">rejected
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="option">
+
+                <button class="btn" id="flag-sure">Save</button>
+                <button class="btn close" id="cancel">Cancel</button>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="container-article">
+        <div class="header">
+            <div class="author">
+                written by boris
+            </div>
+            <div class="date">
+                2018-03-07
+            </div>
+        </div>
+        <div class="container-prime">
+            <div class="content">
+                <!-- <div class="option">
+
+                    <button class="btn" id="edit"><i class="fa fa-edit"></i> Edit</button>
+                    <button class="btn myBtn" id="cancel"><i class="fa fa-trash"></i> Cancel</button>
+
+                </div> -->
+                <div id="card-footer-opt" class="type">
+                
+                    <span>&#9673  red-flag</span>
+                
+                </div>
+                <div class="title">
+                    This is the title
+                </div>
+         
+            <div class="content-detail">
+                    <div class="property">
+              
+                        <div class="property-image">
+                            <img src="images/img1.jpg" alt="image" width="100%" alt="image" />
+                        </div>
+                    
+                    </div>
+                    <div id="card-footer-opt">
+                        
+                        <span id="status-span"><span class="type draft">&#9866 Draft</span></span>
+                    
+                    </div>
+                    <div class="opt-btns option">
+                        <a href="#/"><button class="status flag" id="flag">status</i></button></a>
+                        <a href="./edit_item.html"><button class="edit" >edit</button></a>
+                        <a href="#/"><button class="delete myBtn">delete</i></button></a>
+                    
+                    </div>
+                    <!-- <div class="opt-btns">
+                    
+                        <a href="all properties.html"><button> see all this user properties</button></a>
+                    </div> -->
+                    <!-- google map -->
+                    <div class="property-location">
+                        <p>Google map</p>
+                        <div id="map">
+                        </div>
+                    </div>
+                    <!-- description about property -->
+                    <div class="property-description-full">
+                        <h3 class="title">Description:</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+                            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+                            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+                            PageMaker including versions of Lorem Ipsum</p>
+                    </div>
+                  
+            </div>
+
+                <div class="option flag">
+
+                    <!-- <button class="btn flag" id="flag"><i class="fa fa-flag"></i> Report this article</button> -->
+                </div>
+                <div class="footer">
+                    <p>copyright &COPY; Bihire Jules Boris,All right Reserved</p>
+                
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5L9xd4E8E2tWXEYpwwTtmC_3dxCnxrk&callback=initMap">
+        </script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            var uluru = {
+                lat: -25.344,
+                lng: 131.036
+            };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), {
+                zoom: 4,
+                center: uluru
+            });
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <script src="js/article_detail.js"></script>
+    <script src="js/article_detail_flag.js"></script>
+    <script src="js/admin_detail.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+
+</html>

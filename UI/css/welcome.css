@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css?family=Allerta+Stencil|Baloo|Mitr|Roboto|Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Manjari&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* a:hover 
+{
+     color: red; 
+     text-decoration:none; 
+     cursor:pointer;  
+} */
+.container {
+     width: 60%;
+    height: fit-content;
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.card {
+    position: relative;
+    width: 600px;
+    margin: auto;
+    display: flex;
+}
+.card-item, .card-form {
+    width: 50%;
+    height: 350px;
+}
+.card-item {
+    /* background: #011640; */
+    /* background: #3E38F2; */
+    background:url('https://www.employ-africa.co.za/wp-content/uploads/2019/04/Employ-Africa-African-Reach-Compliant-HR-Payroll-Immigration-Tax.png');
+    position: relative;
+}
+.card-form {
+    /* background: #2E3D51; */
+    background: #0029FA;
+    position: relative;
+}
+a:hover {
+    cursor: pointer;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding-top: 30px;
+}
+
+.slide.signIn {
+    display: block;
+}
+.slide input {
+    width: 100%;
+    padding: 10px 4px;
+     background-color:#5C73F2;
+    border-width: 0;
+    color: #fff;
+}
+input:focus {
+    outline: none;
+}
+
+input::-webkit-input-placeholder {
+     color: white;
+     opacity: .8;
+}
+input{
+    margin-bottom: 4px;
+}
+input:last-child{
+    margin-bottom: 0;
+}
+.fields {
+    width: 80%;
+    margin: auto;
+    border-radius: 4px;
+    overflow: hidden; 
+}
+.bro {
+    display: block;
+}
+#signin, #signup {
+    display: none;
+}
+#signin {
+    display: block;
+}
+
+
+.card-item-content {
+    position: absolute;
+    height: fit-content;
+    top: 65%;
+    left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 10px 30px 6px 25px;
+      font-size: 18px;
+      box-shadow:none;
+      background: #0029FA;
+      color: #fff;
+      border: 1px solid white;
+      border-radius: 5px;
+}
+.card-item-content:hover {
+      /* border:1px solid #0029FA; */
+    background: #fff;
+    box-sizing: border-box;
+}
+.card-item-content:hover a {
+    color: #0029FA;
+}
+.forget {
+    font-size: .7em;
+    text-align: center;
+}
+
+.submit{
+    padding: 5px 30px;
+  color: black;
+  border-width: 0;
+  border-style: groove;
+  border-color: yellow;
+  background: yellow;
+  right: 20px;
+  position: absolute;
+  bottom: 40px;
+  width: fit-content;
+  border-radius: 20px;
+}
+.submit:hover {
+    cursor: pointer;
+}
+#title {
+    font-family: 'Allerta Stencil', sans-serif;
+    font-size: 40px;
+    margin-bottom: 60px;
+}
+.welcome {
+    font-size: 34px;
+    font-family: 'Manjari', sans-serif;
+}
+.welcome-info {
+    text-align: center;
+    color: #000;
+}
+.note {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 2em;
+}
+span {
+    background: orange;
+    color: black;
+}
+@media only screen and (max-width: 1013px) {
+    body {
+        background: #fff;
+        
+    }
+    .welcome-info {
+    text-align: center;
+    color: #000;
+}
+    .card {
+        flex-direction: column;
+        width: 90%;
+        max-width: 360px;
+        margin: auto;
+        
+    }
+    .card-item,.card-form {
+        width: 100%;
+    }
+    .card-item {
+        height: fit-content;
+        background: none;
+    }
+    .card-item-content {
+        width: fit-content;
+        position: relative;
+    height: fit-content;
+    top: 0;
+    left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      box-shadow:none;
+      
+      background:  #0029FA;
+      color: #fff;
+    }
+    .container {
+        margin-top: 200px;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .card-item-content:hover {
+        background:  #0029FA;   
+        box-sizing: content-box;
+    }
+    #signin,#signup {
+        color: #fff;
+    }
+  
+}
