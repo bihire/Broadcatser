@@ -8,6 +8,9 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 ### Heroku API
 [BroadCaster link](https://broadcaster-server.herokuapp.com/)
 
+### Documentation of APIs
+[Endpoints documentation](https://documenter.getpostman.com/view/5339931/SW7aZ8jc)
+
 ## Tools Used
 
 [Javascript](https://javascript.info/) : Language used.
