@@ -31,15 +31,15 @@ header::after {
   margin: 0;
   text-transform: uppercase;
   font-weight: 700;
-  color: orange;
+  color: red;
 }
 .logo span{
   color: #fff;
 }
 .logo:hover {
   cursor: pointer;
-  border: 1px solid orange;
-  color: orange;
+  border: 1px solid red;
+  color: red;
 }
 
 .logo span {

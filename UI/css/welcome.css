@@ -27,23 +27,29 @@ a {
 }
 .card {
     position: relative;
-    width: 600px;
+    width: 90%;
+    max-width: 900px;
     margin: auto;
     display: flex;
 }
-.card-item, .card-form {
-    width: 50%;
-    height: 350px;
+.card-item{
+    width: 60%;
+    height: 450px;
+}
+ .card-form {
+    width: 46%;
+    height: 450px;
 }
 .card-item {
     /* background: #011640; */
     /* background: #3E38F2; */
-    background:url('https://www.employ-africa.co.za/wp-content/uploads/2019/04/Employ-Africa-African-Reach-Compliant-HR-Payroll-Immigration-Tax.png');
+    /* background:url('https://www.employ-africa.co.za/wp-content/uploads/2019/04/Employ-Africa-African-Reach-Compliant-HR-Payroll-Immigration-Tax.png'); */
     position: relative;
 }
 .card-form {
     /* background: #2E3D51; */
-    background: #0029FA;
+    border-radius: 4px;
+    border: .7px solid #0029FA;
     position: relative;
 }
 a:hover {
@@ -64,16 +70,17 @@ a:hover {
 .slide input {
     width: 100%;
     padding: 10px 4px;
-     background-color:#5C73F2;
     border-width: 0;
-    color: #fff;
+    border-bottom: 1px solid #5C73F2;
+    color: black;
+    box-sizing: border-box;
 }
 input:focus {
     outline: none;
 }
 
 input::-webkit-input-placeholder {
-     color: white;
+     color: black;
      opacity: .8;
 }
 input{
@@ -93,6 +100,8 @@ input:last-child{
 }
 #signin, #signup {
     display: none;
+    width: 100%;
+    height: 100%;
 }
 #signin {
     display: block;
@@ -102,10 +111,12 @@ input:last-child{
 .card-item-content {
     position: absolute;
     height: fit-content;
-    top: 65%;
+    width: 70%;
+    bottom: 5%;
     left: 50%;
+    text-align: center;
       transform: translate(-50%, -50%);
-      padding: 10px 30px 6px 25px;
+      padding: 30px 30px;
       font-size: 18px;
       box-shadow:none;
       background: #0029FA;
@@ -114,25 +125,25 @@ input:last-child{
       border-radius: 5px;
 }
 .card-item-content:hover {
-      /* border:1px solid #0029FA; */
-    background: #fff;
-    box-sizing: border-box;
+     
+    cursor: pointer;
 }
-.card-item-content:hover a {
-    color: #0029FA;
-}
+
 .forget {
-    font-size: .7em;
+    font-size: .8em;
     text-align: center;
+}
+p.forget a{
+    color: red;
+
 }
 
 .submit{
     padding: 5px 30px;
-  color: black;
+  color: #fff;
   border-width: 0;
   border-style: groove;
-  border-color: yellow;
-  background: yellow;
+  background: #0029FA;
   right: 20px;
   position: absolute;
   bottom: 40px;
@@ -154,16 +165,21 @@ input:last-child{
 .welcome-info {
     text-align: center;
     color: #000;
+    /* padding: 20px; */
 }
 .note {
     font-size: 18px;
     font-weight: 500;
-    line-height: 2em;
+    line-height: 1.7em;
+    padding: 10px 20px;
+
 }
 span {
-    background: orange;
-    color: black;
+    background: #0029FA;
+    color: #fff;
+
 }
+
 @media only screen and (max-width: 1013px) {
     body {
         background: #fff;
@@ -172,6 +188,9 @@ span {
     .welcome-info {
     text-align: center;
     color: #000;
+}
+.welcome-info .note {
+    display: none;
 }
     .card {
         flex-direction: column;
@@ -196,6 +215,7 @@ span {
       transform: translate(-50%, -50%);
       font-size: 18px;
       box-shadow:none;
+      padding: 10px 30px;
       
       background:  #0029FA;
       color: #fff;
