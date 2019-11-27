@@ -140,16 +140,20 @@ p.forget a{
 }
 
 .submit{
-    padding: 5px 30px;
+    padding: 10px 30px;
   color: #fff;
   border-width: 0;
   border-style: groove;
   background: #0029FA;
-  right: 20px;
+  right: 40px;
+  bottom: 50px;
   position: absolute;
-  bottom: 40px;
   width: fit-content;
   border-radius: 20px;
+}
+.signinSubmit {
+    bottom: 57%;
+
 }
 .submit:hover {
     cursor: pointer;
