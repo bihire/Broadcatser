@@ -5,10 +5,15 @@
 }
 .article-container-header > div {
     margin-right: 10px;
+    padding: 2px;
 }
 .article-container-title >div .number3{
     margin-right: 0;
 }
+.number{
+    color: black;
+}
+
 .flagged-article {
      padding: 0;
     display: grid;
@@ -39,15 +44,15 @@
     /* display: flex;
     flex-direction: column;
     justify-content: space-between; */
-    border: 0.6px solid rgb(130, 205, 228);
+    border: 0.6px solid #0029FA;
     width: 87.84px;
     text-align: center;
     border-radius: 5px;
 }
 .article-container-title p {
-    color: #000;
+    color: #0029FA;
     font-size: 0.8em;
-    font-weight: 700;
+    font-weight: 500;
     padding: 0;
     margin: 0;
 
@@ -67,7 +72,7 @@ p#quote{
     margin-bottom: 10px
 }
 .article-card-flag {
-    border: 0.6px solid rgb(130, 205, 228);
+    border: 0.6px solid rgb(13, 192, 247);
     height: fit-content;
     padding: 0;
     position: relative;
