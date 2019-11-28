@@ -72,16 +72,19 @@ p#quote{
     margin-bottom: 10px
 }
 .article-card-flag {
-    border: 0.6px solid rgb(13, 192, 247);
+    border-bottom: 0.6px solid #0029FA;
     height: fit-content;
     padding: 0;
     position: relative;
-    box-sizing: border-box;
     background: #fff;
     margin: 10px 0;
+    box-sizing: border-box;
 }
 .article-card-flag:hover {
-    border: 0.6px solid #0029FA;    
+    outline: 0.6px solid #0029FA;
+    border-bottom: 0.6px solid #fff;
+    /* outline: 0.8px solid #0029FA; */
+
 }
 .g {
     display: flex;

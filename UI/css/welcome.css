@@ -140,21 +140,21 @@ p.forget a{
 }
 
 .submit{
+    margin: auto;
+    margin-top: 30px;
     padding: 10px 30px;
   color: #fff;
   border-width: 0;
   border-style: groove;
   background: #0029FA;
-  right: 40px;
-  bottom: 50px;
-  position: absolute;
+  position: relative;
   width: fit-content;
   border-radius: 20px;
 }
-.signinSubmit {
-    bottom: 57%;
-
+.signInInputs{
+    margin-top: 30%;
 }
+
 .submit:hover {
     cursor: pointer;
 }

@@ -5,15 +5,13 @@ dotenv.config()
 
 const app = express();
 
-app.set(process.env.SECRET, "super-secret-secret");
-
 export default (req, res, next) => {
   const { token } = req.headers;
   if (token) {
-    jsonwebtoken.verify(token, app.get(process.env.SECRET), (err, token) => {
+    jsonwebtoken.verify(token,process.env.SECRET, (err, token) => {
       if (err) {
-        return res.status(404).json({
-          status: "error",
+        return res.status(403).json({
+          status: 403,
           data: `failed to authanticate token: ${err}`
         });
       }
@@ -21,8 +19,8 @@ export default (req, res, next) => {
       next();
     });
   } else {
-    res.status(403).json({
-      status: "error",
+    res.status(404).json({
+      status: 404,
       data: "please provide token"
     });
   }
