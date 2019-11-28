@@ -19,8 +19,8 @@ export default (req, res, next) => {
       next();
     });
   } else {
-    res.status(404).json({
-      status: 404,
+    res.status(401).json({
+      status: 401,
       data: "please provide token"
     });
   }

@@ -9,7 +9,6 @@ dotenv.config()
 
 const app = express();
 
-// app.set('secretKey', process.env.SECRET);
 export default class AuthanticationController {
     /**
      * @description This helps a new User to create credentials
@@ -20,8 +19,8 @@ export default class AuthanticationController {
             const value = await req.value;
             const User = users.find(user => user.email === value.email);
             if (User)
-                return res.status(401).json({
-                    status: 401,
+                return res.status(403).json({
+                    status: 403,
                     message: "Email provided already exist"
                 });
             value.password = await hashPassword(value.password)
@@ -44,8 +43,8 @@ export default class AuthanticationController {
             const value = req.value;
             const User = users.find(user => user.email === value.email);
             if (!User) {
-                return res.status(401).json({
-                    status: 401,
+                return res.status(403).json({
+                    status: 403,
                     message: 'invalid email or password'
                 });
             }
@@ -59,7 +58,7 @@ export default class AuthanticationController {
                     data: {token:token}
                 })
             } else {
-                res.status(401).json({ status: 401, error: 'invalid email or password' });
+                res.status(403).json({ status: 403, error: 'invalid email or password' });
             }
     }
 

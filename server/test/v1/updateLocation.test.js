@@ -108,7 +108,7 @@ describe('Location', () => {
                
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
-                    res.should.have.status(404);
+                    res.should.have.status(401);
                     res.should.be.a('object');
                     done();
                 });
