@@ -1,7 +1,6 @@
 import fs from 'fs'
 
 import redFlag from "../../models/red-flag"
-import dateTime from "../../heplpers/date"
 import id_auto_inc from "../../heplpers/id_auto_inc"
 import joi from "joi"
 
@@ -77,7 +76,7 @@ export default (req, res, next) => {
                             longitude,
                             latitude,
                             comment,
-                            created_on: dateTime
+                            created_on: new Date()
                         };
                         const schema = joi.object().keys({
                             id: joi
