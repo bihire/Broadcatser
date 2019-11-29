@@ -171,7 +171,7 @@ describe('User Signup', () => {
     })
         .expect('Content-Type', /json/)
         .end((err, res) => {
-            res.should.have.status(401);
+            res.should.have.status(403);
             res.should.be.a('object');
             done();
         });
@@ -239,7 +239,7 @@ describe('User Signup', () => {
                 })
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
-                    res.should.have.status(401);
+                    res.should.have.status(403);
                     res.should.be.a('object');
                     done();
                 });
@@ -256,7 +256,7 @@ describe('User Signup', () => {
                 })
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
-                    res.should.have.status(401);
+                    res.should.have.status(403);
                     res.should.be.a('object');
                     done();
                 });

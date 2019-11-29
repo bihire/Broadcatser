@@ -20,6 +20,7 @@ export default class RedFlagController {
             status: 201,
             data: [{
                 id: value.id,
+                value: value,
                 message: 'Created red- flag record'
             }]
             
@@ -33,8 +34,8 @@ export default class RedFlagController {
     static async updateLocation (req, res) {
         const value = req.value
         let update = findById(redFlags, value.red_flag_id)
-        if (!update) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-        if (res.token.id != update.created_by || update.status !== 'draft' ) throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+        if (!update) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+        if (res.token.id != update.created_by || update.status !== 'draft' ) return responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
 
         update.location = value.location ? value.location : update.location
         res.status(200).json({
@@ -53,8 +54,8 @@ export default class RedFlagController {
    static async updateComment(req, res) {
        const value = req.value
        let update = findById(redFlags, value.red_flag_id)
-       if (!update) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-       if (res.token.id != update.created_by || update.status !== 'draft') throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+       if (!update) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+       if (res.token.id != update.created_by || update.status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
 
        update.comment = value.comment ? value.comment : update.comment
        res.status(200).json({
@@ -76,7 +77,7 @@ static async getOne(req, res) {
         responseMsg.errorMsg(res, 403, 'red-flag-id must be an integer and less than 8 in length')
     }
     let item = findById(redFlags, red_flag_id)
-    if (!item) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+    if (!item) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
     res.status(200).json({
         status: 200,
         data: item
@@ -102,8 +103,8 @@ static async getOne(req, res) {
         const { red_flag_id } = req.params
 
         let item = findById(redFlags, red_flag_id)
-        if (!item) throw responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-        if (item.created_by !== res.token.id || item.status !== 'draft') throw responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+        if (!item) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+        if (item.created_by !== res.token.id || item.status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
         const validId = redFlags.findIndex(redFlag => redFlag.id == red_flag_id)
 
         item.images.forEach(obj => fs.unlinkSync(obj))
@@ -112,10 +113,10 @@ static async getOne(req, res) {
 
         res.status(200).json({
             status: 200,
-            data: [{
+            data: {
                 id: item.id,
                 message: 'red-flag record has been deleted'
-            }]
+            }
         })
     }
 }
