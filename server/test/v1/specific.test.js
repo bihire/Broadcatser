@@ -1,6 +1,8 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http'
 import supertest from 'supertest'
+import app from '../../app.js'
+
 
 chai.use(chaiHttp);
 chai.should();
@@ -13,7 +15,7 @@ describe('Fetch red-flag/intervention', () => {
             supertest('http://localhost:8080/api/v1')
                 .get('/red-flags/1')
                 .set('Accept', 'application/json')
-                .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6ImJpaGlyZSIsImxhc3RfbmFtZSI6ImJvcmlzIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwicGhvbmVfbnVtYmVyIjoiMTIzNDU2Nzg5MCIsInBhc3N3b3JkIjoiJDJhJDEwJE1XTkdrUy50Z1EuRmxaY3puTm1nQXVzVlZ4V1R5NUJvaHZjY2tZdlVpSjQ5YVFaSy9xV1dhIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU3NDk0OTE0NX0.VqTFrNCp0sqJ0u3gc3cC_7LVq6gpeLYsDqDQVOdUat0')
+                .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6ImJpaGlyZSIsImxhc3RfbmFtZSI6ImJvcmlzIiwiZW1haWwiOiJtdWhpcmVib3Jpc0B5YWhvby5mciIsInBob25lX251bWJlciI6IjEyMzQ1Njc4OTAiLCJwYXNzd29yZCI6IiQyYSQxMCROR0hPMWJzNHNhdXAzN0h3S3Mya3MuUVFyYkRMbHNpWDRHcFNOaVBYcTZCSjFUdlJ2cEFjYSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE1NzUwMTcwNTN9.eqtNHB03N5-cQRpWa72-MTXYO7AKJq5as5-_JwEyAp0')
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -27,7 +29,7 @@ describe('Fetch red-flag/intervention', () => {
             supertest('http://localhost:8080/api/v1')
                 .get('/red-flags/g')
                 .set('Accept', 'application/json')
-                .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6ImJpaGlyZSIsImxhc3RfbmFtZSI6ImJvcmlzIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwicGhvbmVfbnVtYmVyIjoiMTIzNDU2Nzg5MCIsInBhc3N3b3JkIjoiJDJhJDEwJE1XTkdrUy50Z1EuRmxaY3puTm1nQXVzVlZ4V1R5NUJvaHZjY2tZdlVpSjQ5YVFaSy9xV1dhIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU3NDk0OTE0NX0.VqTFrNCp0sqJ0u3gc3cC_7LVq6gpeLYsDqDQVOdUat0')
+                .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6ImJpaGlyZSIsImxhc3RfbmFtZSI6ImJvcmlzIiwiZW1haWwiOiJtdWhpcmVib3Jpc0B5YWhvby5mciIsInBob25lX251bWJlciI6IjEyMzQ1Njc4OTAiLCJwYXNzd29yZCI6IiQyYSQxMCROR0hPMWJzNHNhdXAzN0h3S3Mya3MuUVFyYkRMbHNpWDRHcFNOaVBYcTZCSjFUdlJ2cEFjYSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE1NzUwMTcwNTN9.eqtNHB03N5-cQRpWa72-MTXYO7AKJq5as5-_JwEyAp0')
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
                     res.should.have.status(403);
@@ -41,7 +43,7 @@ describe('Fetch red-flag/intervention', () => {
             supertest('http://localhost:8080/api/v1')
                 .get('/red-flags')
                 .set('Accept', 'application/json')
-                .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6ImJpaGlyZSIsImxhc3RfbmFtZSI6ImJvcmlzIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwicGhvbmVfbnVtYmVyIjoiMTIzNDU2Nzg5MCIsInBhc3N3b3JkIjoiJDJhJDEwJE1XTkdrUy50Z1EuRmxaY3puTm1nQXVzVlZ4V1R5NUJvaHZjY2tZdlVpSjQ5YVFaSy9xV1dhIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU3NDk0OTE0NX0.VqTFrNCp0sqJ0u3gc3cC_7LVq6gpeLYsDqDQVOdUat0')
+                .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6ImJpaGlyZSIsImxhc3RfbmFtZSI6ImJvcmlzIiwiZW1haWwiOiJtdWhpcmVib3Jpc0B5YWhvby5mciIsInBob25lX251bWJlciI6IjEyMzQ1Njc4OTAiLCJwYXNzd29yZCI6IiQyYSQxMCROR0hPMWJzNHNhdXAzN0h3S3Mya3MuUVFyYkRMbHNpWDRHcFNOaVBYcTZCSjFUdlJ2cEFjYSIsImlzX2FkbWluIjp0cnVlLCJpYXQiOjE1NzUwMTcwNTN9.eqtNHB03N5-cQRpWa72-MTXYO7AKJq5as5-_JwEyAp0')
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
                     res.should.have.status(200);
