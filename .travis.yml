@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "12.13.0"
 before_install:
-  - psql -c 'CREATE DATABASE broadcaster;' -U postgres
+  - psql -c 'create database broadcaster;' -U postgres
   - npm i
 scripts:
   - npm run test
