@@ -4,42 +4,14 @@ import redFlag from "../../models/red-flag"
 import id_auto_inc from "../../heplpers/id_auto_inc"
 import joi from "joi"
 
-import upload from '../../heplpers/multer'
 import responseMsg from '../../heplpers/responseMsg'
 
 
 export default (req, res, next) => {
     try {
-        upload(req, res,() =>{
-
-            if (req.fileValidationError) {
-                responseMsg.errorMsg(res, 400, req.fileValidationError)
-
-            } else {
-                const allUrls = []
                 const imageUrls = []
                 const videoUrls = []
-                const imageFiles = req.files.image;
-                const videoFiles = req.files.video;
-                if (imageFiles) {
-                    for (const imageFile of imageFiles) {
-                        const { path } = imageFile;
-                        imageUrls.push(path) && allUrls.push(path)
-                    }
-                }
-                if (videoFiles) {
-                    for (const videoFile of videoFiles) {
-                        const { path } = videoFile;
-                        videoUrls.push(path) && allUrls.push(path)
-                    }
-                }
-                const emptyUrlsArr = () => {
-                    allUrls.forEach(obj => fs.unlinkSync(obj))
-                    allUrls.length = 0
-                    imageUrls.length = 0
-                    videoUrls.length = 0
-                }
-                const { location, labels } = JSON.parse(req.body.thisBody)
+                const { location, labels } = req.body
                 if (location && typeof location === 'string' && labels && typeof labels === 'string') {
                     // labels
                     const labelsItems = labels.split(',')
@@ -49,12 +21,12 @@ export default (req, res, next) => {
                     // longitude
                     const latLong = location.split(',')
                     if (latLong.length !== 2) {
-                        emptyUrlsArr()
+                        
                         responseMsg.errorMsg(res, 400, 'add only latitute and longitude separated by a commun on location field')
                     }
                     const findError = obj => obj === '' || isNaN(obj)
                     if (typeof latLong.find(findError) === 'string') {
-                        emptyUrlsArr()
+                        
                         responseMsg.errorMsg(res, 400, 'one field is empty or not a number')
 
                     } else {
@@ -65,7 +37,7 @@ export default (req, res, next) => {
                             title,
                             type,
                             comment
-                        } = JSON.parse(req.body.thisBody)
+                        } = req.body
 
 
                         const artl = {
@@ -123,7 +95,7 @@ export default (req, res, next) => {
                         const { error, value } = joi.validate(artl, schema);
 
                         if (error) {
-                            emptyUrlsArr()
+                            
                             responseMsg.errorMsg(res, 400, error.details[0].message)
                         } else {
                             delete value.latitude
@@ -138,11 +110,10 @@ export default (req, res, next) => {
 
                     }
                 } else {
-                    emptyUrlsArr()
                     responseMsg.errorMsg(res, 400, 'location and labels are compulsory and must be type of string')
                 }
-            }
-        })
+            
+        
 
     } catch (error) {
         responseMsg.errorMsg(res, 500, 'an error happened we are working on it')

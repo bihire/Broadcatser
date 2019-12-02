@@ -45,7 +45,7 @@ form input {
         position: relative;
         box-sizing: border-box;
         border-width: 0;
-           border-bottom: 2px solid #C2E2FE;
+           border-bottom: .6px solid #0029FA;
     }
     textarea{
         width: 100%;
@@ -53,13 +53,13 @@ form input {
         max-height: 350px;
         padding: 37px 15px 20px 15px;
         box-sizing: border-box;
-        border: 2px solid #C2E2FE;
+        border: .6px solid #0029FA;
     }
     form input:focus {
-        border-bottom: 2.2px solid #5C73F2;
+        border-bottom: 2.2px solid #0029FA;
     }
     form textarea:focus {
-        border: 2px solid #5C73F2;
+        border: 2px solid #0029FA;
     }
 .row {
     margin-bottom: 30px;
