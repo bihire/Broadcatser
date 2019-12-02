@@ -25,7 +25,11 @@ export default class AuthanticationController {
                 });
             value.password = await hashPassword(value.password)
             users.push({ ...value });
-            const token = jwt.sign(value, process.env.SECRET);
+            const newValue = {
+                id: value.id,
+                isAdmin: value.is_admin
+            }
+            const token = jwt.sign(newValue, process.env.SECRET);
             res.status(201).send({
                 status: 201,
                 message: "User created successfully",
@@ -51,7 +55,11 @@ export default class AuthanticationController {
             const isUser = await comparePassword({ value, User })
 
             if (isUser) {
-                const token = jwt.sign(User, process.env.SECRET)
+                const newValue = {
+                    id: User.id,
+                    isAdmin: User.is_admin
+                }
+                const token = jwt.sign(newValue, process.env.SECRET)
                 res.status(200).json({
                     status: 200,
                     message: 'User is successfully logged in',

@@ -4,6 +4,7 @@ import fs from 'fs'
 import findById from "../heplpers/findById";
 import redFlags from '../models/red-flag'
 import checkInt from '../heplpers/checkInt'
+import { create } from "domain";
 
 
 export default class RedFlagController {
@@ -20,7 +21,6 @@ export default class RedFlagController {
             status: 201,
             data: [{
                 id: value.id,
-                value: value,
                 message: 'Created red- flag record'
             }]
             
@@ -78,9 +78,22 @@ static async getOne(req, res) {
     }
     let item = findById(redFlags, red_flag_id)
     if (!item) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+    const newItem = {
+        id: item.id,
+        createdBy: item.created_by,
+        title: item.title,
+        type: item.type,
+        comment: item.comment,
+        status: item.status,
+        location: item.location,
+        labels: item.labels,
+        images: item.images,
+        videos: item.videos,
+        createdOn: item.created_on
+    }
     res.status(200).json({
         status: 200,
-        data: item
+        data: newItem
     })
 }
     /**
@@ -89,9 +102,27 @@ static async getOne(req, res) {
     * @param  {object} res - The response object
     */
     static async getAll(req, res) {
+        const data = []
+        await redFlags.forEach(item => {
+            const newItem = {
+                id: item.id,
+                createdBy: item.created_by,
+                title: item.title,
+                type: item.type,
+                comment: item.comment,
+                status: item.status,
+                location: item.location,
+                labels: item.labels,
+                images: item.images,
+                videos: item.videos,
+                createdOn: item.created_on
+            }
+            data.push({...newItem})
+        })
+        
         res.status(200).json({
             status: 200,
-            data: redFlags
+            data: data
         })
     }
     /**
@@ -106,9 +137,6 @@ static async getOne(req, res) {
         if (!item) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
         if (item.created_by !== res.token.id || item.status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
         const validId = redFlags.findIndex(redFlag => redFlag.id == red_flag_id)
-
-        item.images.forEach(obj => fs.unlinkSync(obj))
-        item.videos.forEach(obj => fs.unlinkSync(obj))
         redFlags.splice(validId, 1)
 
         res.status(200).json({
