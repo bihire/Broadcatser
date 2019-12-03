@@ -82,7 +82,6 @@ export default class RedFlagController {
            status: 200,
            data: [{
                id: response.rows[0].id,
-               bro: response.rows[0],
                message: 'Updated red-flag record’s comment'
            }]
        })
