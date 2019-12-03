@@ -1,9 +1,21 @@
+services:
+  - postgresql
+before_script:
+  - psql -c 'CREATE DATABASE team;' -U postgres
+notifications: 
+  email: false
+sudo: false
+
+cache:
+  directories:
+    - 'node_modules'
+before_script:
+  - npm install
+  
 language: node_js
 node_js:
   - "12.13.0"
-before_install:
-  - psql -c 'create database broadcaster;' -U postgres
-  - npm i
+
 scripts:
   - npm run test
 after_success:
