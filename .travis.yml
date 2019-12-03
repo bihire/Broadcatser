@@ -1,7 +1,7 @@
 services:
   - postgresql
 before_script:
-  - psql -c 'CREATE DATABASE team;' -U postgres
+  - psql -c 'CREATE DATABASE broadcaster;' -U postgres
 notifications: 
   email: false
 sudo: false

@@ -51,15 +51,18 @@ export default class AuthanticationController {
    * @param  {object} res - The response object
    */
     static async login(req, res) {
-        
-            const value = req.value;
-            const User = users.find(user => user.email === value.email);
-            if (!User) {
+        const value = req.value;
+        const fetch_text = 'SELECT * FROM users WHERE email = $1'
+        const values = [value.email]
+            
+        const { rows } = await pool.query(fetch_text, values)
+            if (!rows[0]) {
                 return res.status(403).json({
                     status: 403,
                     message: 'invalid email or password'
                 });
             }
+            const User = rows[0]
             const isUser = await comparePassword({ value, User })
 
             if (isUser) {
