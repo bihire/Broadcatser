@@ -130,7 +130,10 @@ static async getOne(req, res) {
     */
     static async getAll(req, res) {
         const data = []
-        await redFlags.forEach(item => {
+        const fetch_text = 'SELECT * FROM flags'
+
+        const { rows } = await pool.query(fetch_text)
+        await rows.forEach(item => {
             const newItem = {
                 id: item.id,
                 createdBy: item.created_by,
