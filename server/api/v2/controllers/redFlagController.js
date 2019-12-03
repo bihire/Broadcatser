@@ -65,15 +65,23 @@ export default class RedFlagController {
     */
    static async updateComment(req, res) {
        const value = req.value
-       let update = findById(redFlags, value.red_flag_id)
-       if (!update) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-       if (res.token.id != update.created_by || update.status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
+       const updateOne = `UPDATE flags SET comment=($2) where id=($1) returning *`;
+       const fetch_text = 'SELECT * FROM flags WHERE id = $1'
 
-       update.comment = value.comment ? value.comment : update.comment
+       const { rows } = await pool.query(fetch_text, [value.red_flag_id])
+       if (!rows[0]) {
+           return res.status(404).json({
+               status: 404,
+               message: 'red-flag-id not found'
+           });
+       }
+
+       if (res.token.id != rows[0].created_by || rows[0].status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have no rights over this endpoint')
+       const response = await pool.query(updateOne, [value.red_flag_id, value.comment]);
        res.status(200).json({
            status: 200,
            data: [{
-               id: update.id,
+               id: response.rows[0].id,
                message: 'Updated red-flag record’s comment'
            }]
        })
