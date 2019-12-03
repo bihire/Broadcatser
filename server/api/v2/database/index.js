@@ -48,7 +48,7 @@ const createRedFlagTables = () => {
       type VARCHAR(128) NOT NULL,
       status VARCHAR(128) NOT NULL,
       comment TEXT NOT NULL,
-      location VARCHAR(128) NOT NULL,
+      location TEXT NOT NULL,
       created_by INTEGER NOT NULL,
       labels TEXT[] NOT NULL,
       images TEXT[] NOT NULL,
