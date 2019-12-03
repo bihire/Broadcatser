@@ -1,12 +1,13 @@
 import redFlag from "../models/red-flag"
+import { Pool } from 'pg'
 import responseMsg from '../heplpers/responseMsg'
-import fs from 'fs'
 import findById from "../heplpers/findById";
 import redFlags from '../models/red-flag'
 import checkInt from '../heplpers/checkInt'
-import { create } from "domain";
 
-
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL
+});
 export default class RedFlagController {
     /**
     * @description This helps the authorized User to create a new red-flag/intervention
@@ -14,13 +15,16 @@ export default class RedFlagController {
     * @param  {object} res - The response object
     */
     static async create (req, res) {
-       const value = req.value
-       redFlag.push({...value})
+        const value = req.value
+        const text = ('INSERT INTO flags(title, type, comment, status, location,labels, images, videos,created_by, created_on) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *')
+        const values = [value.title, value.type, value.comment, value.status, value.location, value.labels, value.images, value.videos, value.created_by, value.created_on]
+
+        const { rows } = await pool.query(text, values);
 
         res.status(201).json({
             status: 201,
             data: [{
-                id: value.id,
+                id: rows[0].id,
                 message: 'Created red- flag record'
             }]
             

@@ -37,6 +37,36 @@ const createUserTables = () => {
         });
 };
 
+/**
+ * Create Red-flag/Intervention Tables
+ */
+const createRedFlagTables = () => {
+    const queryText = `DROP TABLE IF EXISTS flags; CREATE TABLE
+    flags(
+      id SERIAL,
+      title VARCHAR(250) NOT NULL,
+      type VARCHAR(128) NOT NULL,
+      status VARCHAR(128) NOT NULL,
+      comment TEXT NOT NULL,
+      location VARCHAR(128) NOT NULL,
+      created_by INTEGER NOT NULL,
+      labels TEXT[] NOT NULL,
+      images TEXT[] NOT NULL,
+      videos TEXT[] NOT NULL,
+      created_on DATE
+    )`;
+    pool
+        .query(queryText)
+        .then(res => {
+            console.log(res);
+            pool.end();
+        })
+        .catch(err => {
+            console.log(err);
+            pool.end();
+        });
+};
+
 pool.on('remove', () => {
     console.log('client removed');
     process.exit(0);
@@ -44,6 +74,7 @@ pool.on('remove', () => {
 
 const createTables = () => {
     createUserTables();
+    createRedFlagTables();
 };
 module.exports = createTables;
 
