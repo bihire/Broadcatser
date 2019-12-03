@@ -96,20 +96,27 @@ static async getOne(req, res) {
     if (!checkInt(red_flag_id)) {
         responseMsg.errorMsg(res, 403, 'red-flag-id must be an integer and less than 8 in length')
     }
-    let item = findById(redFlags, red_flag_id)
-    if (!item) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+    const fetch_text = 'SELECT * FROM flags WHERE id = $1'
+
+    const { rows } = await pool.query(fetch_text, [red_flag_id])
+    if (!rows[0]) {
+        return res.status(404).json({
+            status: 404,
+            message: 'red-flag-id not found'
+        });
+    }
     const newItem = {
-        id: item.id,
-        createdBy: item.created_by,
-        title: item.title,
-        type: item.type,
-        comment: item.comment,
-        status: item.status,
-        location: item.location,
-        labels: item.labels,
-        images: item.images,
-        videos: item.videos,
-        createdOn: item.created_on
+        id: rows[0].id,
+        createdBy: rows[0].created_by,
+        title: rows[0].title,
+        type: rows[0].type,
+        comment: rows[0].comment,
+        status: rows[0].status,
+        location: rows[0].location,
+        labels: rows[0].labels,
+        images: rows[0].images,
+        videos: rows[0].videos,
+        createdOn: rows[0].created_on
     }
     res.status(200).json({
         status: 200,
