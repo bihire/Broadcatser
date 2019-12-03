@@ -1,5 +1,3 @@
-import users from "../../models/user"
-import id_auto_inc from "../../heplpers/id_auto_inc"
 import responseMsg from '../../heplpers/responseMsg'
 
 
@@ -15,7 +13,6 @@ export default (req, res, next) => {
         isAdmin
     } = req.body;
     const user = {
-        id: id_auto_inc(users),
         first_name: firstName,
         last_name: lastName,
         email,
@@ -25,10 +22,6 @@ export default (req, res, next) => {
         is_admin: isAdmin
     };
     const schema = joi.object().keys({
-        id: joi
-            .number()
-            .integer()
-            .required(),
         first_name: joi
             .string()
             .regex(/^[a-zA-Z0-9\s]{3,25}$/)

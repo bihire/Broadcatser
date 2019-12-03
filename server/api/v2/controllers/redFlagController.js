@@ -1,8 +1,5 @@
-import redFlag from "../models/red-flag"
 import { Pool } from 'pg'
 import responseMsg from '../heplpers/responseMsg'
-import findById from "../heplpers/findById";
-import redFlags from '../models/red-flag'
 import checkInt from '../heplpers/checkInt'
 
 const pool = new Pool({
@@ -37,7 +34,7 @@ export default class RedFlagController {
     */
     static async updateLocation (req, res) {
         const value = req.value
-        const updateOne = `UPDATE flags SET location=($2) where id=($1) returning *`;
+        const updateOne = `UPDATE flags SET location=($2) where id=($1) returning *`
         const fetch_text = 'SELECT * FROM flags WHERE id = $1'
 
         const { rows } = await pool.query(fetch_text, [value.red_flag_id])
@@ -162,17 +159,26 @@ static async getOne(req, res) {
     */
     static async delete(req, res) {
         const { red_flag_id } = req.params
+        if (!checkInt(red_flag_id)) {
+            responseMsg.errorMsg(res, 403, 'red-flag-id must be an integer and less than 8 in length')
+        }
+        const deleteOne = `DELETE FROM flags WHERE id=($1) returning *`
+        const fetch_text = 'SELECT * FROM flags WHERE id = $1'
 
-        let item = findById(redFlags, red_flag_id)
-        if (!item) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
-        if (item.created_by !== res.token.id || item.status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have rights over this endpoint')
-        const validId = redFlags.findIndex(redFlag => redFlag.id == red_flag_id)
-        redFlags.splice(validId, 1)
-
+        const { rows } = await pool.query(fetch_text, [red_flag_id])
+        if (!rows[0]) {
+            return res.status(404).json({
+                status: 404,
+                message: 'red-flag-id not found'
+            });
+        }
+        if (res.token.id != rows[0].created_by || rows[0].status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have no rights over this endpoint')
+        const response = await pool.query(deleteOne, [red_flag_id]);
+        
         res.status(200).json({
             status: 200,
             data: {
-                id: item.id,
+                id: response.rows[0].id,
                 message: 'red-flag record has been deleted'
             }
         })

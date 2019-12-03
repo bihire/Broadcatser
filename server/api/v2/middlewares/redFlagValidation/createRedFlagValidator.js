@@ -1,7 +1,3 @@
-import fs from 'fs'
-
-import redFlag from "../../models/red-flag"
-import id_auto_inc from "../../heplpers/id_auto_inc"
 import joi from "joi"
 
 import responseMsg from '../../heplpers/responseMsg'
@@ -41,7 +37,6 @@ export default (req, res, next) => {
 
 
                         const artl = {
-                            id: id_auto_inc(redFlag),
                             created_by: token.id,
                             title,
                             type,
@@ -51,10 +46,6 @@ export default (req, res, next) => {
                             created_on: new Date()
                         };
                         const schema = joi.object().keys({
-                            id: joi
-                                .number()
-                                .integer()
-                                .required(),
                             created_by: joi
                                 .number()
                                 .integer()

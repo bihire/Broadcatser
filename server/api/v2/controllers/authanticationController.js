@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
 import { Pool } from 'pg'
-import users from "../models/user"
 import hashPassword from '../heplpers/hash'
 import comparePassword from '../heplpers/compareHash'
 import dotenv from 'dotenv'

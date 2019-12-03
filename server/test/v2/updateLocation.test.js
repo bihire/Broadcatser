@@ -135,7 +135,7 @@ describe('Location', () => {
     describe('Delete red-flag/intervention', () => {
         describe('delete specific red-flag/intervention', () => {
             it('User should receive a successful delete red-flag/intervention message', (done) => {
-                supertest('http://localhost:8080/api/v1')
+                supertest('http://localhost:8080/api/v2')
                     .delete('/red-flags/2')
                     .set('Accept', 'application/json')
                     .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTc1Mjg0MzE0fQ.h63MpVqFhQVBFunnFS9f4-_VqsdbGhozMt62c0Zgkzc')
