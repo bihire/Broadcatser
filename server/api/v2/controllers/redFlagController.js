@@ -96,12 +96,8 @@ static async getOne(req, res) {
     const fetch_text = 'SELECT * FROM flags WHERE id = $1'
 
     const { rows } = await pool.query(fetch_text, [red_flag_id])
-    if (!rows[0]) {
-        return res.status(404).json({
-            status: 404,
-            message: 'red-flag-id not found'
-        });
-    }
+    if (!rows[0]) return responseMsg.errorMsg(res, 404, 'red-flag-id not found')
+    
     const newItem = {
         id: rows[0].id,
         createdBy: rows[0].created_by,
@@ -159,9 +155,8 @@ static async getOne(req, res) {
     */
     static async delete(req, res) {
         const { red_flag_id } = req.params
-        if (!checkInt(red_flag_id)) {
-            responseMsg.errorMsg(res, 403, 'red-flag-id must be an integer and less than 8 in length')
-        }
+        if (!checkInt(red_flag_id)) return responseMsg.errorMsg(res, 403, 'red-flag-id must be an integer and less than 8 in length')
+        
         const deleteOne = `DELETE FROM flags WHERE id=($1) returning *`
         const fetch_text = 'SELECT * FROM flags WHERE id = $1'
 

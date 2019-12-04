@@ -7,7 +7,33 @@ export default (req, res, next) => {
     try {
                 const imageUrls = []
                 const videoUrls = []
-                const { location, labels } = req.body
+                const { location, labels, images, videos } = req.body
+
+        // if (!category) throw {
+        //     status: 204,
+        //     message: 'please provide atleast one category'
+        // }
+        if (images && !Array.isArray(images) || videos && !Array.isArray(videos)) return responseMsg.errorMsg(res, 400, 'images and videos must be type of array')
+        
+        const regImages = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g
+        const regVideos = /(http(s?):)([/|.|\w|\s|-])*\.(?:mp4)/g
+        
+        const check = (x,reg,storage) => {
+            return x.every(i=> {
+                if (typeof i !== 'string') return responseMsg.errorMsg(res, 400, 'all images or videos must be strings and image or video urls')
+                
+                const mn = i.replace(/(^\ *)|(\ *$)/g, '').replace(/ +/g, " ")
+                storage.push(mn)
+                return mn.match(reg) ? true : false
+
+            });
+        }
+
+        if (images && !check(images, regImages, imageUrls)) return responseMsg.errorMsg(res, 400, 'all images must be strings and image urls')
+        
+        if (videos && !check(videos, regVideos, videoUrls)) return responseMsg.errorMsg(res, 400, 'all vidoes must be strings and video urls')
+
+
                 if (location && typeof location === 'string' && labels && typeof labels === 'string') {
                     // labels
                     const labelsItems = labels.split(',')
@@ -103,9 +129,6 @@ export default (req, res, next) => {
                 } else {
                     responseMsg.errorMsg(res, 400, 'location and labels are compulsory and must be type of string')
                 }
-            
-        
-
     } catch (error) {
         responseMsg.errorMsg(res, 500, 'an error happened we are working on it')
 
