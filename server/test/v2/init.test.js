@@ -47,5 +47,18 @@ describe('Testing', () => {
                     done();
                 });
         });
+    });
+    describe('Get a not found api version message', () => {
+        it('User should receive a not found api version message', (done) => {
+            supertest('http://localhost:8080/api/v2/bro')
+                .get('/')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    res.should.have.status(404);
+                    res.should.be.a('object');
+                    done();
+                });
+        });
     })
 })
