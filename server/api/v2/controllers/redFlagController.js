@@ -3,7 +3,7 @@ import responseMsg from '../heplpers/responseMsg'
 import checkInt from '../heplpers/checkInt'
 
 const pool = new Pool({
-    connectionString: process.env.HEROKU_POSTGRESQL_JADE_URL
+    connectionString: process.env.DATABASE_URL
 });
 export default class RedFlagController {
     /**
