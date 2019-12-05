@@ -7,7 +7,7 @@
     "test": "npm run create && nyc --require @babel/register mocha server/test/v1/*.js server/test/v2/*.js  --exit",
     "lint": "eslint --ignore-path .gitignore **/*.js",
     "format": "prettier-eslint **/*.{js,json} --write",
-    "start": "nodemon --exec babel-node ./server/app.js",
+    "start": "npm run create && nodemon --exec babel-node ./server/app.js",
     "coveralls": "nyc report  --reporter=text-lcov  | coveralls",
     "ci": "npm run nyctest && npm run coveralls",
     "create": "babel-node server/api/v2/database/index.js createTables"
