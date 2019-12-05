@@ -171,7 +171,7 @@ describe('User Signup', () => {
     })
         .expect('Content-Type', /json/)
         .end((err, res) => {
-            res.should.have.status(403);
+            res.should.have.status(409);
             res.should.be.a('object');
             done();
         });

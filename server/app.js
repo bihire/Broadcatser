@@ -21,7 +21,8 @@ app.use((req, res, next) => {
         const appPath = path.join(__dirname, `./api/${version}/index.js`);
         if (!fs.existsSync(appPath)) {
             return res.status(404).send({
-                message: "sorry we don't offer that version of endpoints"
+                status: 404,
+                error: "sorry we don't offer that version of endpoints"
             });
         }
         require(appPath)
