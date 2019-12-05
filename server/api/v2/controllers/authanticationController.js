@@ -7,7 +7,7 @@ dotenv.config()
 
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.HEROKU_POSTGRESQL_JADE_URL
 });
 
 export default class AuthanticationController {
