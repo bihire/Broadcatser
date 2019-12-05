@@ -17,13 +17,24 @@ export default class RedFlagController {
         const values = [value.title, value.type, value.comment, value.status, value.location, value.labels, value.images, value.videos, value.created_by, value.created_on]
 
         const { rows } = await pool.query(text, values);
+        const newItem = {
+            id: rows[0].id,
+            createdBy: rows[0].created_by,
+            title: rows[0].title,
+            type: rows[0].type,
+            comment: rows[0].comment,
+            status: rows[0].status,
+            location: rows[0].location,
+            labels: rows[0].labels,
+            images: rows[0].images,
+            videos: rows[0].videos,
+            createdOn: rows[0].created_on
+        }
 
         res.status(201).json({
             status: 201,
-            data: [{
-                id: rows[0].id,
-                message: 'Created red- flag record'
-            }]
+            message: 'Created red- flag record',
+            data: newItem
             
         })
     }  
@@ -47,12 +58,23 @@ export default class RedFlagController {
 
         if (res.token.id != rows[0].created_by || rows[0].status !== 'draft' ) return responseMsg.errorMsg(res, 403, 'you have no rights over this endpoint')
         const response = await pool.query(updateOne, [value.red_flag_id, value.location]);
+        const newItem = {
+            id: response.rows[0].id,
+            createdBy: response.rows[0].created_by,
+            title: response.rows[0].title,
+            type: response.rows[0].type,
+            comment: response.rows[0].comment,
+            status: response.rows[0].status,
+            location: response.rows[0].location,
+            labels: response.rows[0].labels,
+            images: response.rows[0].images,
+            videos: response.rows[0].videos,
+            createdOn: response.rows[0].created_on
+        }
         res.status(200).json({
             status: 200,
-            data: [{
-                id: response.rows[0].id,
-                message: 'Updated red-flag record’s location'
-            }]
+            message: 'Updated red-flag record’s location',
+            data: newItem
         })
     }
     /**
@@ -75,12 +97,23 @@ export default class RedFlagController {
 
        if (res.token.id != rows[0].created_by || rows[0].status !== 'draft') return responseMsg.errorMsg(res, 403, 'you have no rights over this endpoint')
        const response = await pool.query(updateOne, [value.red_flag_id, value.comment]);
+       const newItem = {
+           id: response.rows[0].id,
+           createdBy: response.rows[0].created_by,
+           title: response.rows[0].title,
+           type: response.rows[0].type,
+           comment: response.rows[0].comment,
+           status: response.rows[0].status,
+           location: response.rows[0].location,
+           labels: response.rows[0].labels,
+           images: response.rows[0].images,
+           videos: response.rows[0].videos,
+           createdOn: response.rows[0].created_on
+       }
        res.status(200).json({
            status: 200,
-           data: [{
-               id: response.rows[0].id,
-               message: 'Updated red-flag record’s comment'
-           }]
+           message: 'Updated red-flag record’s comment',
+           data: newItem
        })
    }
 /**

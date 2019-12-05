@@ -24,12 +24,23 @@ export default class adminController {
             });
         }
         const response = await pool.query(updateOne, [value.red_flag_id, value.status]);
+        const newItem = {
+            id: rows[0].id,
+            createdBy: rows[0].created_by,
+            title: rows[0].title,
+            type: rows[0].type,
+            comment: rows[0].comment,
+            status: rows[0].status,
+            location: rows[0].location,
+            labels: rows[0].labels,
+            images: rows[0].images,
+            videos: rows[0].videos,
+            createdOn: rows[0].created_on
+        }
         res.status(200).json({
             status: 200,
-            data: [{
-                id: response.rows[0].id,
-                message: 'Updated red-flag record’s status'
-            }]
+            message: 'Updated red-flag record’s status',
+            data: newItem
         })
     }
 }

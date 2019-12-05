@@ -36,8 +36,8 @@ export default class AuthanticationController {
                 data: { token: token }
             });
         } catch (error){
-            if (error && error.routine === '_bt_check_unique') return res.status(403).json({
-                status: 403,
+            if (error && error.routine === '_bt_check_unique') return res.status(409).json({
+                status: 409,
                 error: 'Email provided already exist'
             })
         }
