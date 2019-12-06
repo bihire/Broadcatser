@@ -1,3 +1,3 @@
-const redFlags = []
+const redFlags = [];
 
-export default redFlags
+export default redFlags;

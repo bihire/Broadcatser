@@ -1,21 +1,21 @@
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import { Pool } from "pg";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL
 });
 
-pool.on('connect', () => {
-    console.log('Connected to database succesfully');
+pool.on("connect", () => {
+  console.log("Connected to database succesfully");
 });
 
 /**
  * Create User Tables
  */
 const createUserTables = () => {
-    const queryText = `DROP TABLE IF EXISTS users; CREATE TABLE
+  const queryText = `DROP TABLE IF EXISTS users; CREATE TABLE
     users(
       id SERIAL,
       first_name VARCHAR(128) NOT NULL,
@@ -25,23 +25,23 @@ const createUserTables = () => {
       phone_number VARCHAR(25) NOT NULL,
       is_admin BOOLEAN NOT NULL
     )`;
-    pool
-        .query(queryText)
-        .then(res => {
-            console.log(res);
-            pool.end();
-        })
-        .catch(err => {
-            console.log(err);
-            pool.end();
-        });
+  pool
+    .query(queryText)
+    .then(res => {
+      console.log(res);
+      pool.end();
+    })
+    .catch(err => {
+      console.log(err);
+      pool.end();
+    });
 };
 
 /**
  * Create Red-flag/Intervention Tables
  */
 const createRedFlagTables = () => {
-    const queryText = `DROP TABLE IF EXISTS flags; CREATE TABLE
+  const queryText = `DROP TABLE IF EXISTS flags; CREATE TABLE
     flags(
       id SERIAL,
       title VARCHAR(250) NOT NULL,
@@ -55,27 +55,27 @@ const createRedFlagTables = () => {
       videos TEXT[] NOT NULL,
       created_on DATE
     )`;
-    pool
-        .query(queryText)
-        .then(res => {
-            console.log(res);
-            pool.end();
-        })
-        .catch(err => {
-            console.log(err);
-            pool.end();
-        });
+  pool
+    .query(queryText)
+    .then(res => {
+      console.log(res);
+      pool.end();
+    })
+    .catch(err => {
+      console.log(err);
+      pool.end();
+    });
 };
 
-pool.on('remove', () => {
-    console.log('client removed');
-    process.exit(0);
+pool.on("remove", () => {
+  console.log("client removed");
+  process.exit(0);
 });
 
 const createTables = () => {
-    createUserTables();
-    createRedFlagTables();
+  createUserTables();
+  createRedFlagTables();
 };
 module.exports = createTables;
 
-require('make-runnable');
+require("make-runnable");
