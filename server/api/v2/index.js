@@ -1,17 +1,15 @@
-import app from '../../app'
-import authRoutes from "./routes/auth"
-import redFlagRoutes from "./routes/redFlag-Intervention"
-import adminRoutes from "./routes/admin"
-import responseMsg from './heplpers/responseMsg'
-
+import app from "../../app";
+import authRoutes from "./routes/auth";
+import redFlagRoutes from "./routes/redFlag-Intervention";
+import adminRoutes from "./routes/admin";
+import responseMsg from "./heplpers/responseMsg";
 
 app.get("/api/v2", (req, res) => {
-    responseMsg.successMsg(res, 200, 'initializing successful in v2')
+  responseMsg.successMsg(res, 200, "initializing successful in v2");
 });
 app.use("/api/v2/auth", authRoutes);
 app.use("/api/v2/red-flags", redFlagRoutes);
 app.use("/api/v2/admin", adminRoutes);
 app.use((req, res, next) => {
-    responseMsg.errorMsg(res, 404, "endpoint URL not found")
-})
-
+  responseMsg.errorMsg(res, 404, "endpoint URL not found");
+});
