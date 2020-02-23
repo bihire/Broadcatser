@@ -12,7 +12,7 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 ### Documentation of APIs
 [Endpoints documentation](https://documenter.getpostman.com/view/5339931/SW7aZ8jc)
 
-## Tools Used
+## Tools Used 
 
 [Javascript](https://javascript.info/) : Language used.
 
