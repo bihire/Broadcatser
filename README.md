@@ -16,7 +16,7 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 
 [Javascript](https://javascript.info/) : Language used.
 
-[NodeJS](https://nodejs.org/en/) : Javascript runtime.
+[NodeJS](https://nodejs.org/en/) : Javascript runtime. 
 
 [Express](http://expressjs.com/) : NodeJs framework.
 
